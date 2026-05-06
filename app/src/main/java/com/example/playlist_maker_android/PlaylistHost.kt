@@ -8,37 +8,21 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun PlaylistHost(
-    navController: NavHostController = rememberNavController()
+    startDestination: String = Screen.MAIN_MENU.route,
+    navController: NavHostController = rememberNavController(),
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = Screen.MAIN.name
-    ) {
-        composable(Screen.MAIN.name) {
-            MainScreen(
-                onSearchClick = {
-                    navController.navigate(Screen.SEARCH.name)
-                },
-                onSettingsClick = {
-                    navController.navigate(Screen.SETTINGS.name)
-                }
+    NavHost(navController, startDestination) {
+        composable(route = Screen.MAIN_MENU.route) {
+            MenuScreen(
+                onSearchClick = { navController.navigate(Screen.SEARCH.route) },
+                onSettingsClick = { navController.navigate(Screen.SETTINGS.route) }
             )
         }
-
-        composable(Screen.SEARCH.name) {
-            SearchScreen(
-                onBackClick = {
-                    navController.popBackStack()
-                }
-            )
+        composable(route = Screen.SEARCH.route) {
+            SearchScreen(onBackClick = { navController.popBackStack() })
         }
-
-        composable(Screen.SETTINGS.name) {
-            SettingsScreen(
-                onBackClick = {
-                    navController.popBackStack()
-                }
-            )
+        composable(route = Screen.SETTINGS.route) {
+            SettingsScreen(onBackClick = { navController.popBackStack() })
         }
     }
 }

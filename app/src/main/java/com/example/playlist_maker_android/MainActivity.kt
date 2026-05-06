@@ -4,17 +4,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.playlist_maker_android.ui.theme.PlaylistmakerandroidTheme
+import com.example.playlist_maker_android.ui.utils.ButtonSample
+import com.example.playlist_maker_android.ui.utils.IconType
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,97 +39,70 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(
-    onSearchClick: () -> Unit = {},
-    onSettingsClick: () -> Unit = {}
+fun MenuScreen(
+    onSearchClick: () -> Unit,
+    onSettingsClick: () -> Unit
 ) {
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(Color(0xFF3772E7)) // Using the blue from the snippet
     ) {
-        Box(
+        Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFF3369FF))
-                .padding(horizontal = 16.dp, vertical = 16.dp)
-        ) {
-            Text(
-                text = "Playlist maker",
-                color = Color.White,
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-
-        Column(
+                .padding(top = 14.dp, start = 16.dp),
+            text = stringResource(R.string.app_name),
+            fontSize = 22.sp,
+            color = Color.White,
+            style = MaterialTheme.typography.titleMedium,
+            fontFamily = FontFamily.SansSerif
+        )
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = 8.dp)
+                .padding(top = 70.dp)
+                .background(
+                    color = Color.White,
+                    shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+                ),
         ) {
-            MenuItem(
-                title = "Поиск",
-                iconRes = R.drawable.baseline_search_24,
-                onClick = onSearchClick
-            )
-
-            MenuItem(
-                title = "Плейлисты",
-                iconRes = R.drawable.library_music
+            Column(
+                modifier = Modifier.padding(vertical = 8.dp)
             ) {
+                ButtonSample(
+                    leadingIcon = IconType.PainterIcon(painterResource(R.drawable.baseline_search_24)),
+                    trailingIcon = IconType.PainterIcon(painterResource(R.drawable.ic_arrow_forward)),
+                    contentDescription = stringResource(R.string.search),
+                    onClick = onSearchClick
+                )
+                ButtonSample(
+                    leadingIcon = IconType.PainterIcon(painterResource(R.drawable.library_music)),
+                    trailingIcon = IconType.PainterIcon(painterResource(R.drawable.ic_arrow_forward)),
+                    contentDescription = stringResource(R.string.playlists),
+                    onClick = {}
+                )
+                ButtonSample(
+                    leadingIcon = IconType.PainterIcon(painterResource(R.drawable.favorite_border)),
+                    trailingIcon = IconType.PainterIcon(painterResource(R.drawable.ic_arrow_forward)),
+                    contentDescription = stringResource(R.string.favorites),
+                    onClick = {}
+                )
+                ButtonSample(
+                    leadingIcon = IconType.PainterIcon(painterResource(R.drawable.settings)),
+                    trailingIcon = IconType.PainterIcon(painterResource(R.drawable.ic_arrow_forward)),
+                    contentDescription = stringResource(R.string.settings),
+                    onClick = onSettingsClick
+                )
             }
-
-            MenuItem(
-                title = "Избранное",
-                iconRes = R.drawable.favorite_border
-            ) {
-            }
-
-            MenuItem(
-                title = "Настройки",
-                iconRes = R.drawable.settings,
-                onClick = onSettingsClick
-            )
         }
     }
 }
 
+@Preview
 @Composable
-fun MenuItem(
-    title: String,
-    iconRes: Int,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onClick() }
-            .padding(horizontal = 16.dp, vertical = 14.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            painter = painterResource(id = iconRes),
-            contentDescription = title,
-            tint = Color.Black,
-            modifier = Modifier.size(24.dp)
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(
-            text = title,
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.weight(1f)
-        )
-        Icon(
-            painter = painterResource(id = R.drawable.ic_arrow_forward),
-            contentDescription = "Перейти",
-            modifier = Modifier.size(24.dp)
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview() {
+private fun MenuScreenPreview() {
     PlaylistmakerandroidTheme {
-        MainScreen()
+        MenuScreen(onSearchClick = { }, onSettingsClick = { })
     }
 }

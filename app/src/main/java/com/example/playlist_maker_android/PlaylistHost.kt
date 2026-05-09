@@ -1,10 +1,14 @@
 package com.example.playlist_maker_android
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.playlist_maker_android.ui.search.SearchViewModel
 
 @Composable
 fun PlaylistHost(
@@ -19,7 +23,14 @@ fun PlaylistHost(
             )
         }
         composable(route = Screen.SEARCH.route) {
-            SearchScreen(onBackClick = { navController.popBackStack() })
+            val searchViewModel: SearchViewModel = viewModel(
+                factory = SearchViewModel.getViewModelFactory()
+            )
+            SearchScreen(
+                modifier = Modifier.fillMaxSize(),
+                viewModel = searchViewModel,
+                onBackClick = { navController.popBackStack() }
+            )
         }
         composable(route = Screen.SETTINGS.route) {
             SettingsScreen(onBackClick = { navController.popBackStack() })

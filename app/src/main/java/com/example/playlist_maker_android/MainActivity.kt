@@ -77,7 +77,7 @@ fun MenuScreen(
                     onClick = onSearchClick
                 )
                 ButtonSample(
-                    leadingIcon = IconType.PainterIcon(painterResource(R.drawable.library_music)),
+                    leadingIcon = IconType.PainterIcon(painterResource(R.drawable.library)),
                     trailingIcon = IconType.PainterIcon(painterResource(R.drawable.ic_arrow_forward)),
                     contentDescription = stringResource(R.string.playlists),
                     onClick = {}

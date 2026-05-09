@@ -28,23 +28,24 @@ fun CorrectIcon(
 ) {
     when (icon) {
         is IconType.PainterIcon -> {
-            // Check for dark theme switch specifically as in the provided snippet
-            // We use stringResource(R.string.dark_theme) to identify it
             if (contentDescription == stringResource(R.string.dark_theme)) {
                 Box(
                     contentAlignment = Alignment.Center
                 ) {
-                    // Assuming theme_switch_icon and knob_icon might not exist yet, 
-                    // I will use placeholders if they fail, but for now, I'll write the code as requested.
-                    // Note: If these resources are missing, it will cause a compile error.
                     Icon(
                         modifier = Modifier.size(height = 12.dp, width = 35.dp),
                         painter = icon.painter,
                         contentDescription = contentDescription,
                         tint = Color.LightGray
                     )
-                    // We need to be careful here if R.drawable.knob_icon doesn't exist.
-                    // I'll try to find it first.
+                    Icon(
+                        modifier = Modifier
+                            .size(18.dp)
+                            .align(Alignment.CenterStart),
+                        painter = painterResource(R.drawable.knob),
+                        contentDescription = contentDescription,
+                        tint = Color.Gray,
+                    )
                 }
             } else {
                 Icon(

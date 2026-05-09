@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -50,7 +48,7 @@ fun SettingsScreen(onBackClick: () -> Unit) {
                 verticalPadding = 12
             ) { }
             ButtonSample(
-                trailingIcon = IconType.ImageVectorIcon(Icons.Default.Share),
+                trailingIcon = IconType.PainterIcon(painterResource(R.drawable.share)),
                 contentDescription = stringResource(R.string.share_app),
                 contentFontSize = 16,
                 horizontalPadding = 16,

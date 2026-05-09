@@ -16,4 +16,7 @@
     <string name="empty_media_library">Ваша медиатека пуста</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="title_activity_search">Поиск</string>
+    <string name="title_empty">Ничего не найдено</string>
+    <string name="title_no_internet">Проблемы со связью</string>
+    <string name="error_no_internet">Загрузка не удалась. Проверьте подключение к интернету</string>
 </resources>

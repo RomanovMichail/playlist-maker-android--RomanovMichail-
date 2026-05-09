@@ -7,7 +7,7 @@ import com.example.playlist_maker_android.domain.api.TracksRepository
 import com.example.playlist_maker_android.domain.impl.TrackSearchInteractorImpl
 
 object Creator {
-    private fun getTracksRepository(): TracksRepository {
+    fun getTracksRepository(): TracksRepository {
         return TracksRepositoryImpl(RetrofitNetworkClient(Storage()))
     }
 
